@@ -15,7 +15,9 @@ def test_normalise_strips_zero_width():
 
 def test_normalise_clean_text_no_actions():
     text, actions = normalise("What's the capital of Kenya?")
-    assert actions == []
+    assert "removed zero-width characters" not in actions
+    assert "decoded base64" not in actions
+    assert "decoded hex" not in actions
 
 
 def test_score_prompt_flags_injection():

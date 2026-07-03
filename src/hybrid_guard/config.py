@@ -10,4 +10,7 @@ AUDIT_LOG_FILE = LOG_DIR / "audit_log.csv"
 RISK_THRESHOLD = 40
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "mistral:7b"
+PRODUCTION_MODEL = "mistral:7b"
+DEMO_MODEL = "llama3.2:3b"
+MODEL_NAME = PRODUCTION_MODEL
+DEFAULT_CLASSIFICATION_REPEATS = 3

@@ -1,7 +1,7 @@
 import json
 import requests
 from collections import Counter
-
+from hybrid_guard.config import DEFAULT_CLASSIFICATION_REPEATS
 from hybrid_guard.config import OLLAMA_URL, MODEL_NAME
 
 # a few labelled examples to guide the model - this is the "few-shot" part
@@ -50,7 +50,7 @@ def ask_ollama(prompt_text):
                 "prompt": full_prompt,
                 "stream": False,
             },
-            timeout=30,
+            timeout=600,
         )
         response.raise_for_status()
     except requests.exceptions.ConnectionError:
@@ -88,7 +88,7 @@ def parse_response(raw_output):
     return "SUSPICIOUS", "could not parse model response"
 
 
-def classify(prompt_text, repeats=3):
+def classify(prompt_text, repeats=DEFAULT_CLASSIFICATION_REPEATS):
     votes = []
     rationales = []
 
