@@ -53,7 +53,7 @@ def ask_ollama(prompt_text):
             timeout=600,
         )
         response.raise_for_status()
-    except requests.exceptions.ConnectionError:
+    except (requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout):
         raise RuntimeError(
             "Could not connect to Ollama. Make sure 'ollama serve' is running "
             "and the model is pulled (ollama pull mistral:7b)."
